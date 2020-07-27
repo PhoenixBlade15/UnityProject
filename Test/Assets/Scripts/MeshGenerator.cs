@@ -74,7 +74,6 @@ public class MeshGenerator : MonoBehaviour
                 wallTriangles.Add(startIndex + 3);
                 wallTriangles.Add(startIndex + 1);
                 wallTriangles.Add(startIndex + 0);
-
             }
         }
 
