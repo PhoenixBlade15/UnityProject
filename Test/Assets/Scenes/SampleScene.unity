@@ -524,7 +524,7 @@ MonoBehaviour:
   smoothAmount: 5
   seed: 
   useRandomSeed: 1
-  randomFillPercent: 45
+  randomFillPercent: 53
   wallThresholdSize: 50
   roomThresholdSize: 50
 --- !u!4 &2110358860
