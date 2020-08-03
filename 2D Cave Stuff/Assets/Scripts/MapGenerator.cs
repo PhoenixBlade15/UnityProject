@@ -30,6 +30,9 @@ public class MapGenerator : MonoBehaviour
     public int roomThresholdSize;
     public int passageWaySize;
 
+    Coord spawnPoint;
+    public GameObject Player;
+
     void Start()
     {
         GenerateMap();
@@ -125,7 +128,26 @@ public class MapGenerator : MonoBehaviour
         survivingRooms[0].isMainRoom = true;
         survivingRooms[0].isAccessibleFromMainRoom = true;
 
+        SetSpawnPoint(survivingRooms[0]);
+        SetPlayerPosition();
+
         ConnectClosestRooms(survivingRooms);
+    }
+
+    // Sets a spawn point for the player
+    void SetSpawnPoint(Room mainRoom)
+    {
+        // spawnPoint = random tile in mainRoom
+        System.Random spawnPointRNG = new System.Random(seed.GetHashCode());
+        spawnPoint = mainRoom.tiles[spawnPointRNG.Next(0, mainRoom.tiles.Count)];
+        Debug.Log(spawnPoint.tileX + " " + spawnPoint.tileY);
+    }
+
+    // Sets player to the spawn point
+    void SetPlayerPosition()
+    {
+        Player.transform.position = CoordToWorldPoint(spawnPoint);
+        Debug.Log(Player.transform.position);
     }
 
     // Connects rooms with the closest room
@@ -220,7 +242,7 @@ public class MapGenerator : MonoBehaviour
     void CreatePassage(Room roomA, Room roomB, Coord tileA, Coord tileB)
     {
         Room.ConnectRooms(roomA, roomB);
-        Debug.DrawLine(CoordToWorldPoint(tileA), CoordToWorldPoint(tileB), Color.green, 100);
+        //Debug.DrawLine(CoordToWorldPoint(tileA), CoordToWorldPoint(tileB), Color.green, 100);
 
         List<Coord> line = GetLine(tileA, tileB);
         foreach(Coord c in line)
@@ -309,7 +331,7 @@ public class MapGenerator : MonoBehaviour
     // Creates a real spot representation of a coord
     Vector3 CoordToWorldPoint(Coord tile)
     {
-        return new Vector3(-width / 2 + .5f + tile.tileX, 2, -height / 2 + .5f + tile.tileY);
+        return new Vector3(-width / 2 + .5f + tile.tileX, -height / 2 + .5f + tile.tileY, 0);
     }
 
     // Method to get all the regions
