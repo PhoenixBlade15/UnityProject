@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
 
+    // Variable Initialzation 
+    Rigidbody2D rigidBody;
+
+    // For basic movement
     public float speed;
     public float jumpForce;
 
+    // For jumping/falling information
     public float fallMultiplier = 2.5f;
+
+    // How fast you fall from a low jump
     public float lowJumpMultiplier = 2f;
 
+    // For making sure only certain amount of jumps before touching ground again
     bool isGrounded = false;
     public Transform isGroundedChecker;
     public float checkGroundRadius;
@@ -20,18 +27,20 @@ public class PlayerMovement : MonoBehaviour
     public float rememberGroundedFor;
     float lastTimeGrounded;
 
-    public int defaultAdditionalJumps = 1;
+    // Max amount of jumps in the air
+    public int maxAdditionalJumps = 1;
     int additionalJumps;
 
 
-
+    // Sets the additionalJumps variable and gets the rigid body
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
 
-        additionalJumps = defaultAdditionalJumps;
+        additionalJumps = maxAdditionalJumps;
     }
 
+    // Calls movement based methods
     void Update()
     {
         Move();
@@ -40,37 +49,42 @@ public class PlayerMovement : MonoBehaviour
         CheckIfGrounded();
     }
 
-
+    // Moves the player left or right depending on input, and makes allows the player to keep current vertical velocity
     void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
 
         float moveBy = x * speed;
 
-        rb.velocity = new Vector2(moveBy, rb.velocity.y);
+        rigidBody.velocity = new Vector2(moveBy, rigidBody.velocity.y);
     }
 
+    // Launches the player into the air based on jump force, allows player to keep horizontal velocity, or if player has more air jumps
     void Jump()
     {
+
+        // if jump key is pressed, and player is on ground for long enough, or has more air jumps to use
         if (Input.GetKeyDown(KeyCode.Space) && (isGrounded || Time.time - lastTimeGrounded <= rememberGroundedFor || additionalJumps > 0))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
             additionalJumps--;
         }
     }
 
+    // A method to make jumping feel better
     void BetterJump()
     {
-        if (rb.velocity.y < 0)
+        if (rigidBody.velocity.y < 0)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
+            rigidBody.velocity += Vector2.up * Physics2D.gravity * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (rigidBody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
-            rb.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rigidBody.velocity += Vector2.up * Physics2D.gravity * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
     }
 
+    // Checks if the player is on the ground
     void CheckIfGrounded()
     {
         Collider2D colliders = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
@@ -78,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         if (colliders != null)
         {
             isGrounded = true;
-            additionalJumps = defaultAdditionalJumps;
+            additionalJumps = maxAdditionalJumps;
         }
         else
         {

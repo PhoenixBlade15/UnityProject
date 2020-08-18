@@ -473,8 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8be1488ab8c45499620f0a3654074c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
-  jumpForce: 5
+  speed: 10
+  jumpForce: 10
   fallMultiplier: 2.5
   lowJumpMultiplier: 2
   isGroundedChecker: {fileID: 1505397478}
@@ -483,4 +483,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   rememberGroundedFor: 0
-  defaultAdditionalJumps: 0
+  maxAdditionalJumps: 0
