@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class goToWinScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	// If the dog is touched by the player then go to win screen
+	void OnCollisionEnter(Collision collision)
+	{
+		SceneManager.LoadScene("endScene");
+	}
 }
