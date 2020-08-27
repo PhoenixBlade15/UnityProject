@@ -854,8 +854,8 @@ Transform:
   m_GameObject: {fileID: 1336484589}
   m_LocalRotation: {x: -0.0058918223, y: -0.000000029802322, z: 0.000000007450581,
     w: 0.9999827}
-  m_LocalPosition: {x: -4.25, y: 2.13, z: 3.91}
-  m_LocalScale: {x: 0.0062638544, y: 0.0062638544, z: 0.0062638544}
+  m_LocalPosition: {x: -2.9432, y: 1.8907, z: 3.9128}
+  m_LocalScale: {x: 0.0034621577, y: 0.0034621577, z: 0.0034621577}
   m_Children: []
   m_Father: {fileID: 1902202540}
   m_RootOrder: 0
@@ -873,7 +873,9 @@ TextMesh:
     The goal is to find the dog and touch it.
 
     Press
-    any key to begin!'
+    any key to begin!
+
+    (Arrow Keys to move)'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
