@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 2110358860}
   - component: {fileID: 2110358859}
   - component: {fileID: 2110358861}
+  - component: {fileID: 2110358862}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -668,6 +669,18 @@ MonoBehaviour:
   walls: {fileID: 44615307}
   cave: {fileID: 1288961767}
   is2D: 1
+--- !u!114 &2110358862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110358858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd428584ee9dbd4c821c3d6038200f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2117401737
 GameObject:
   m_ObjectHideFlags: 0

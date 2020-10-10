@@ -24,6 +24,7 @@ public class Player2D : MonoBehaviour
     void FixedUpdate()
     {
         rigidbody.MovePosition(rigidbody.position + velocity * Time.fixedDeltaTime);
+
     }
 
 
